@@ -1,0 +1,24 @@
+{
+  "name": "multi-agent-health-coach",
+  "version": "1.0.0",
+  "description": "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tauri": "npx tauri",
+    "tauri:dev": "npx tauri dev",
+    "tauri:build": "npx tauri build",
+    "dev": "npx tauri dev",
+    "build": "npx tauri build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@tauri-apps/api": "^2.6.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.6.2"
+  }
+}

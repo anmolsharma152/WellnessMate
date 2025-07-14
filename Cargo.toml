@@ -1,0 +1,12 @@
+[package]
+name = "test_bridge"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "test_bridge"
+path = "test_bridge.rs"
+
+[dependencies]
+pyo3 = { version = "0.22.0", features = ["auto-initialize"] }
+anyhow = "1.0"

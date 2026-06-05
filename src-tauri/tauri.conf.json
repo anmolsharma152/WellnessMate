@@ -1,96 +1,37 @@
 {
+  "$schema": "https://schema.tauri.app/config/2.0.0",
+  "productName": "WellnessMate",
+  "version": "0.1.0",
+  "identifier": "com.example.wellnessmate",
   "build": {
-    "beforeDevCommand": "cd web && npm start",
-    "beforeBuildCommand": "cd web && npm run build",
-    "devPath": "http://localhost:3000",
-    "distDir": "../web/build"
+    "frontendDist": "../web/build",
+    "devUrl": "http://localhost:3000"
   },
-  "package": {
-    "productName": "WellnessMate",
-    "version": "0.1.0"
-  },
-  "tauri": {
-    "bundle": {
-      "active": true,
-      "category": "Health",
-      "copyright": "",
-      "deb": {
-        "depends": []
-      },
-      "externalBin": [],
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "com.wellnessmate.app",
-      "longDescription": "An AI-Powered Personal Health & Posture Companion",
-      "macOS": {
-        "entitlements": null,
-        "exceptionDomain": "",
-        "frameworks": [],
-        "providerShortName": null,
-        "signingIdentity": null
-      },
-      "shortDescription": "Your personal health and posture companion",
-      "targets": ["app", "dmg"],
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": "",
-        "wix": {
-          "language": "en-US",
-          "template": ""
-        }
-      }
-    },
-    "security": {
-      "csp": null
-    },
-    "updater": {
-      "active": false
-    },
+  "app": {
     "windows": [
       {
-        "fullscreen": false,
+        "title": "WellnessMate",
+        "width": 1200,
         "height": 800,
         "resizable": true,
-        "title": "WellnessMate",
-        "width": 1200
+        "fullscreen": false
       }
     ],
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "all": false,
-        "open": true
-      },
-      "window": {
-        "all": false,
-        "close": true,
-        "hide": true,
-        "show": true,
-        "maximize": true,
-        "minimize": true,
-        "unmaximize": true,
-        "unminimize": true,
-        "startDragging": true
-      },
-      "dialog": {
-        "all": false,
-        "open": true,
-        "save": true
-      },
-      "fs": {
-        "all": false,
-        "readFile": true,
-        "writeFile": true,
-        "readDir": true,
-        "createDir": true,
-        "scope": ["$APPDATA/*", "$HOME/*"]
-      }
+    "security": {
+      "csp": null
     }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png"
+    ],
+    "copyright": "",
+    "category": "Utility",
+    "shortDescription": "AI-powered health and posture companion",
+    "longDescription": "WellnessMate is your personal AI health companion that helps monitor posture, provides health insights, and promotes wellness habits."
   }
 }

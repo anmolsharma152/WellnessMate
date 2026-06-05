@@ -1,123 +1,138 @@
 # 🧠 WellnessMate
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Project Status: Active Development](https://img.shields.io/badge/Status-Active%20Development-brightgreen)](https://github.com/yourusername/wellnessmate)
+[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://python.org)
+[![CrewAI](https://img.shields.io/badge/CrewAI-1.x-green.svg)](https://crewai.com)
+[![Tauri](https://img.shields.io/badge/Tauri-2.0-purple.svg)](https://tauri.app)
+[![Project Status: Active Development](https://img.shields.io/badge/Status-Active%20Development-brightgreen)](https://github.com/anmolsharma152/WellnessMate)
 
-> An AI-Powered Personal Health & Posture Companion that helps improve your wellness through intelligent coaching and real-time posture monitoring.
+> An AI-powered personal health companion — multi-agent coaching system with real-time posture monitoring and a native desktop experience.
 
-## 🚧 Current Status (July 2024)
+---
 
-✅ **Completed**
+## 🤖 What Works Right Now
 
-- Project structure and setup
-- Basic Tauri + React frontend
-- Python AI engine scaffolding
-- Rust-Python bridge implementation
+The Python AI engine is fully functional as a CLI tool:
 
-🔄 **In Progress**
+```bash
+# Run with demo profile
+python -m python.main --demo
 
-- AI agent implementations (Nutritionist, Trainer, Therapist)
-- Posture detection integration
-- Frontend-backend communication
+# Run interactively
+python -m python.main
+```
 
-📅 **Up Next**
+Three CrewAI agents collaborate sequentially to produce a unified wellness plan:
 
-- Implement CrewAI agent orchestration
-- Add real-time posture monitoring
-- Build the symptom checker component
+| Agent | Role | Tools |
+|---|---|---|
+| **Nutritionist** | TDEE-based meal planning, macro targets, food swaps | BMI Calculator, TDEE Calculator |
+| **Trainer** | Weekly training split, progressive overload, mobility | BMI Calculator |
+| **Therapist** | Stress assessment, micro-habits, morning/evening routines | Micro-Habit Suggestor |
 
-![WellnessMate Demo](assets/wellnessmate-demo.gif)
+Each agent receives context from the previous one — the trainer aligns intensity with the nutritionist's calorie targets; the therapist supports both plans through sleep and habit optimization.
 
-## ✨ Features
+---
 
-- 🤖 Multi-Agent AI Coaching (Nutritionist, Trainer, Therapist)
-- 🎥 Real-time Posture Detection
-- 💡 Smart Micro-Habit Suggestions
-- 🩺 Symptom Checker & First Aid Assistant
-- 📅 Personalized Reminders & Progress Tracking
-- 🖥️ Native Desktop Experience (Windows, macOS, Linux)
+## 🏗️ Architecture
+
+```
+WellnessMate/
+├── python/
+│   ├── agents/              # CrewAI agent definitions
+│   │   ├── nutritionist.py
+│   │   ├── trainer.py
+│   │   └── therapist.py
+│   ├── tasks/
+│   │   └── health_tasks.py  # Task definitions + UserProfile dataclass
+│   ├── tools/
+│   │   └── health_tools.py  # BMI, TDEE, MicroHabit tools
+│   ├── crew.py              # Crew orchestration
+│   ├── main.py              # CLI entry point
+│   ├── posture.py           # MediaPipe posture detection (Phase 2)
+│   └── symptom_checker.py   # Symptom KB (Phase 2)
+├── src-tauri/               # Rust backend + Tauri 2.0 config
+└── web/                     # React frontend (Phase 2)
+```
+
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
 - Linux (Arch recommended)
-- Git
-- Basic command line knowledge
+- Python 3.12
+- [uv](https://docs.astral.sh/uv/) — fast Python package manager
+- Rust + Cargo (for Tauri desktop build)
+- Node.js + npm (for frontend)
+- [Groq API key](https://console.groq.com) (free tier works)
 
-### 🛠️ Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/anmolsharma152/wellnessmate.git
-   cd wellnessmate
-   ```
-
-2. **Run the setup script**
-   This will install all necessary dependencies (Rust, Python 3.11, Node.js, etc.)
-
-   ```bash
-   chmod +x setup.sh  # Make the script executable if not already
-   ./setup.sh         # Run the setup script
-   ```
-
-3. **Activate the virtual environment** (if not already activated by the setup script)
-
-   ```bash
-   source venv/bin/activate
-   ```
-
-4. **Start the development server**
-
-   ```bash
-   npm run tauri dev
-   ```
-
-### 🖥️ Development
-
-- **Frontend**: The web interface is in the `web/` directory
-- **Backend**: The Rust backend is in `src-tauri/`
-- **AI Logic**: Python code is in the `python/` directory
-
-### 🏗️ Building for Production
+### Installation
 
 ```bash
-npm run tauri build
+git clone https://github.com/anmolsharma152/WellnessMate.git
+cd WellnessMate
+
+# Create virtual environment
+uv venv
+source .venv/bin/activate
+
+# Install Python dependencies
+uv pip install "crewai>=0.80.0" groq python-dotenv loguru
+
+# Add your Groq API key
+echo "GROQ_API_KEY=your_key_here" > .env
+
+# Run the wellness assessment CLI
+python -m python.main --demo
 ```
 
-## 🛠️ Development
-
-### Project Structure
-
-```
-wellnessmate/
-├── src-tauri/              # Rust backend + Tauri config
-├── python/                 # AI logic and agents
-└── web/                    # Frontend UI
-```
-
-### Building
+### Desktop App (Work in Progress)
 
 ```bash
-# Build for production
-npm run tauri build
+# Install frontend dependencies
+npm install
+
+# Start development server
+npm run tauri dev
 ```
 
-## 🤝 Contributing
-
-Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Built with [Tauri](https://tauri.app/), [Rust](https://www.rust-lang.org/), and [Python](https://www.python.org/)
-- Uses [CrewAI](https://www.crewai.com/) for multi-agent orchestration
-- Posture detection powered by [MediaPipe](https://mediapipe.dev/)
+> ⚠️ The Tauri desktop UI is scaffolded but the Python↔Rust IPC bridge is not yet connected. The CLI is the working interface for now.
 
 ---
 
-Made with ❤️ by [Anmol Sharma] | [Website](https://anmolsharma152.vercel.app)
+## 📋 Roadmap
+
+See [ROADMAP.md](ROADMAP.md) for the full completion status across all phases.
+
+**Phase 1 ✅** — CrewAI agents, tools, CLI  
+**Phase 2 🏗️** — Rust↔Python bridge, posture detection, React UI  
+**Phase 3 ❌** — CV parsing, cron automation, data persistence, packaging  
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Desktop shell | Tauri 2.0 (Rust) |
+| Frontend | React + TypeScript |
+| AI agents | CrewAI 1.x |
+| LLM inference | Groq API (llama-3.1-8b-instant) |
+| Computer vision | MediaPipe + OpenCV |
+| Tools | Custom CrewAI BaseTool |
+| Package manager | uv (Python 3.12) |
+
+---
+
+## 🙏 Acknowledgments
+
+- [Tauri](https://tauri.app/) — native desktop shell
+- [CrewAI](https://crewai.com/) — multi-agent orchestration
+- [Groq](https://groq.com/) — LLM inference
+- [MediaPipe](https://mediapipe.dev/) — posture detection
+
+---
+
+Made with ❤️ by [Anmol Sharma](https://anmolsharma152.vercel.app)

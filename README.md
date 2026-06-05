@@ -8,17 +8,20 @@
 ## 🚧 Current Status (July 2024)
 
 ✅ **Completed**
+
 - Project structure and setup
 - Basic Tauri + React frontend
 - Python AI engine scaffolding
 - Rust-Python bridge implementation
 
 🔄 **In Progress**
+
 - AI agent implementations (Nutritionist, Trainer, Therapist)
 - Posture detection integration
 - Frontend-backend communication
 
 📅 **Up Next**
+
 - Implement CrewAI agent orchestration
 - Add real-time posture monitoring
 - Build the symptom checker component
@@ -38,31 +41,35 @@
 
 ### Prerequisites
 
-- Linux (Ubuntu/Debian recommended)
+- Linux (Arch recommended)
 - Git
 - Basic command line knowledge
 
 ### 🛠️ Installation
 
 1. **Clone the repository**
+
    ```bash
-   git clone https://github.com/yourusername/wellnessmate.git
+   git clone https://github.com/anmolsharma152/wellnessmate.git
    cd wellnessmate
    ```
 
 2. **Run the setup script**
    This will install all necessary dependencies (Rust, Python 3.11, Node.js, etc.)
+
    ```bash
    chmod +x setup.sh  # Make the script executable if not already
    ./setup.sh         # Run the setup script
    ```
 
 3. **Activate the virtual environment** (if not already activated by the setup script)
+
    ```bash
    source venv/bin/activate
    ```
 
 4. **Start the development server**
+
    ```bash
    npm run tauri dev
    ```
@@ -113,4 +120,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Made with ❤️ by [Your Name] | [Website](https://yourwebsite.com)
+Made with ❤️ by [Anmol Sharma] | [Website](https://anmolsharma152.vercel.app)
